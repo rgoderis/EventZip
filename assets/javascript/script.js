@@ -45,7 +45,10 @@ $(document).ready(function(){
             var p4 = $("<p>");
             p4.text(address);
             var p5 = $("<p>");
-            p5.text("<a>"+tickmasterURL+"</a>")
+            var a = $("<a>")
+            a.attr("href", tickmasterURL)
+            a.text("Ticketmaster")
+            p5.append(a)
             div.append(header);
             div.append(img);
             div.append(p1);
