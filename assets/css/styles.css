@@ -12,3 +12,10 @@ a {
     text-decoration: none;
     font-size: 1rem;
 }
+
+#buttonRow {
+    text-align: center;
+}
+#inputForm{
+    text-align: center;
+}
