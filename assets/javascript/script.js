@@ -83,30 +83,65 @@ $(document).ready(function(){
             },
             method: "GET"
         }).then(function(response){
-            console.log(response)
-            // name
-            console.log(response.businesses[0].name)
-            // image
-            console.log(response.businesses[0].image_url)
-            // type of location
-            for(var i = 0; i < response.businesses[0].categories.length; i++)
-            console.log(response.businesses[0].categories[i].title)
-            // open
-            if(response.businesses[0].is_closed){
-                console.log("Closed")
-            } else {
-                console.log("Open")
+            // loop through response results
+            for(var i = 0; i < number; i++){
+                // restaurant name
+                var name = response.businesses[i].name;
+                // img url
+                var imgURL = response.businesses[i].image_url
+                // rest types
+                var type = response.businesses[i].categories[0].title
+                // isClosed
+                var isClosed = response.businesses[i].is_closed
+                // address
+                var address = response.businesses[i].location.address1 + ". " +response.businesses[i].location.city +", " + response.businesses[i].location.state +". "+  response.businesses[i].location.zip_code
+                // phone number
+                var phone = response.businesses[i].phone
+                // price
+                var price = response.businesses[i].price
+                // rating
+                var rating = response.businesses[i].rating
+                // website
+                var websiteURL = response.businesses[i].url
+
+                var div = $("<div>")
+                var header = $("<h3>")
+                header.text(name);
+                var img = $("<img>");
+                img.attr("src", imgURL)
+                img.attr("alt", header)
+                var p1 = $("<p>");
+                p1.text(type)
+                var p2 = $("<p2>")
+                if(isClosed){
+                    p2.text("Currently Closed")
+                } else {
+                    p2.text("Open Now")
+                }
+                var p3 = $("<p>")
+                p3.text(address)
+                var p4 = $("<p>");
+                p4.text(phone);
+                p5 = $("<p>");
+                p5.text(price);
+                p6 = $("<p>");
+                p6.text("Yelp rating: " + rating + " stars")
+                p7 = $("<p>")
+                a = $("<a>")
+                a.attr("href", websiteURL)
+                a.text("view website")
+                p7.append(a)
+                div.append(header);
+                div.append(img);
+                div.append(p1)
+                div.append(p2)
+                div.append(p3)
+                div.append(p4)
+                div.append(p5)
+                div.append(p6)
+                div.append(p7)
+                $("#results").append(div)
             }
-            // location address
-            console.log(response.businesses[0].location.address1 + ". " +response.businesses[0].location.city +", " + response.businesses[0].location.state +". "+  response.businesses[0].location.zip_code)
-            // phone number
-            console.log(response.businesses[0].phone)
-            // price
-            console.log(response.businesses[0].price)
-            // review
-            console.log(response.businesses[0].rating)
-            // url
-            console.log(response.businesses[0].url)
         })
     })
 
