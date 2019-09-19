@@ -4,6 +4,11 @@ it slower, make the height a lower number. */
     height: "your height here";
   } */
 
-  nav .brand-logo {
+nav .brand-logo {
     font-size: 3.5rem;
-  }
+}
+
+a {
+    text-decoration: none;
+    font-size: 1rem;
+}
