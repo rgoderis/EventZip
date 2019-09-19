@@ -11,10 +11,11 @@ $(document).ready(function(){
     $('.parallax').parallax();
 
     // click listener on zipSubmit 
-    $("#events-btn").on("click", function(event){
-        // event.preventDefault();
-        // sets value to zipcode_inline to zip
-        zip = $("#zipcode_inline").val().trim();
+    $("#events-btn").on("click", function(){
+    // empty results div
+    $("#results").empty()
+    // sets value to zipcode_inline to zip
+    zip = $("#zipcode_inline").val().trim();
     
     // code for ticketmaster API
     let zipCode = zip
