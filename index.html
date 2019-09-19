@@ -8,7 +8,7 @@
     <title>EventZip</title>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    
+
     <!-- link for using google Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
@@ -39,7 +39,7 @@
             <a id="rests-btn" class="btn" class="waves-effect waves-light btn-large"><i
                     class="material-icons right">cloud</i>Restaurants</a>
             <a id="bars-btn" class="btn" class="waves-effect waves-light btn-large"><i
-                class="material-icons right">cloud</i>Bars</a>
+                    class="material-icons right">cloud</i>Bars</a>
             <a id="hotels-btn" class="btn" class="waves-effect waves-light btn-large"><i
                     class="material-icons right">cloud</i>Hotels</a>
             <a id="movies-btn" class="btn" class="waves-effect waves-light btn-large"><i
@@ -60,10 +60,29 @@
                             <label for="zipcode_inline">Zipcode</label>
                             <span class="helper-text" data-error="wrong" data-success="right"></span>
                         </div>
+
+                        <!-- Created the drop down for the amount of results user would like.  -->
+                        <div class="input-field inline">
+                            <select>
+                              <option value="" disabled selected>Choose your option</option>
+                              <option value="1">5</option>
+                              <option value="2">10</option>
+                              <option value="3">15</option>
+                            </select>
+                            <label>Results Total</label>
+                        </div>
                     </div>
-                </div>
+
+                    
             </form>
+
+
+
         </div>
+        </div>
+        </div>
+
+
         <div id="results">White Space!!</div>
     </main>
 
@@ -72,15 +91,16 @@
     <footer class="page-footer">
         <div class="container">
             <div class="row">
-                    <h5 class="white-text center-align">Contributors</h5>
-                    <ul class="center-align">
-                        <li><a class="grey-text text-lighten-3" href="https://github.com/rgoderis">Ryan Goderis</a></li>
-                        <li><a class="grey-text text-lighten-3" href="https://github.com/Ckopei">Cameron Kopel</a></li>
-                        <li><a class="grey-text text-lighten-3" href="https://github.com/dlopez079">David Lopez</a></li>
-                        <li><a class="grey-text text-lighten-3" href="https://github.com/RecoveringChef">Dan Crenshaw</a></li>
-                    </ul>
-                </div>
+                <h5 class="white-text center-align">Contributors</h5>
+                <ul class="center-align">
+                    <li><a class="grey-text text-lighten-3" href="https://github.com/rgoderis">Ryan Goderis</a></li>
+                    <li><a class="grey-text text-lighten-3" href="https://github.com/Ckopei">Cameron Kopel</a></li>
+                    <li><a class="grey-text text-lighten-3" href="https://github.com/dlopez079">David Lopez</a></li>
+                    <li><a class="grey-text text-lighten-3" href="https://github.com/RecoveringChef">Dan Crenshaw</a>
+                    </li>
+                </ul>
             </div>
+        </div>
         </div>
         <div class="footer-copyright">
             <div class="container">
@@ -93,7 +113,7 @@
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-        <!-- Compiled and minified JavaScript -->
+    <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="assets/javascript/script.js"></script>
 </body>
