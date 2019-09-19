@@ -25,41 +25,48 @@ $(document).ready(function(){
             for(var i = 0; i < 5; i++){
                 // variables for response calls
                 var eventName = response._embedded.events[i].name;
-                var imgURL = response._embedded.events[i].images[1].url;
+                var imgURL = response._embedded.events[i].images[0].url;
                 var date = response._embedded.events[i].dates.start.localDate;
                 var startTime = response._embedded.events[i].dates.start.localTime;
                 var venue = response._embedded.events[i]._embedded.venues[0].name;
                 var address = response._embedded.events[i]._embedded.venues[0].address.line1  + " " + response._embedded.events[i]._embedded.venues[0].city.name+ ", " + response._embedded.events[i]._embedded.venues[0].state.name + " " + response._embedded.events[i]._embedded.venues[0].postalCode
                 var tickmasterURL = response._embedded.events[i].url;
 
-                // append results to page
-                var div = $("<div>");
-                var header = $("<h3>");
-                header.text(eventName);
-                var img = $("<img>")
-                img.attr("src", imgURL);
-                img.attr("alt", eventName);
-                var p1 = $("<p>");
-                p1.text(date);
-                var p2 = $("<p>");
-                p2.text(startTime);
-                var p3 = $("<p>");
-                p3.text(venue);
-                var p4 = $("<p>");
-                p4.text(address);
-                var p5 = $("<p>");
+                var card = $("<div>")
+                card.addClass("row")
+                var b = $("<div>")
+                b.addClass("col s12 m6")
+                var c = $("<div>")
+                c.addClass("card")
+                var d = $("<div>")
+                d.addClass("card-image")
+                var e = $("<img>")
+                e.attr("src", imgURL)
+                var f = $("<span>")
+                f.addClass("card-title")
+                f.text(eventName)
+                var g = $("<div>")
+                g.addClass("card-content")
+                var cardBody1 = $("<p>")
                 var a = $("<a>")
                 a.attr("href", tickmasterURL)
-                a.text("Ticketmaster")
-                p5.append(a)
-                div.append(header);
-                div.append(img);
-                div.append(p1);
-                div.append(p2);
-                div.append(p3);
-                div.append(p4);
-                div.append(p5);
-                $("#results").append(div);
+                a.text("Buy Tickets Here")
+                cardBody1.append(a)
+                var cardBody2 = $("<h3>")
+                cardBody2.text("Date: " + date)
+                var cardBody3 = $("<h3>")
+                cardBody3.text("Start Time: "+ startTime)
+                var cardBody4 = $("<h3>")
+                cardBody4.text("Venue: "+ venue)
+                var cardBody5 = $("<h3>")
+                cardBody5.text(address)
+                g.append(cardBody1,cardBody2, cardBody3, cardBody4, cardBody5)
+                d.append(f,e)
+                c.append(d,g)
+                b.append(c)
+                card.append(b)
+                //append "card" to the page wherever we want it.
+                $("#results").append(card);
             }
         });
     });
@@ -103,43 +110,47 @@ $(document).ready(function(){
                 // website
                 var websiteURL = response.businesses[i].url
 
-                var div = $("<div>")
-                var header = $("<h3>")
-                header.text(name);
-                var img = $("<img>");
-                img.attr("src", imgURL)
-                img.attr("alt", header)
-                var p1 = $("<p>");
-                p1.text(type)
-                var p2 = $("<p2>")
-                if(isClosed){
-                    p2.text("Currently Closed")
-                } else {
-                    p2.text("Open Now")
-                }
-                var p3 = $("<p>")
-                p3.text(address)
-                var p4 = $("<p>");
-                p4.text(phone);
-                p5 = $("<p>");
-                p5.text(price);
-                p6 = $("<p>");
-                p6.text("Yelp rating: " + rating + " stars")
-                p7 = $("<p>")
-                a = $("<a>")
+                var card = $("<div>")
+                card.addClass("row")
+                var b = $("<div>")
+                b.addClass("col s12 m6")
+                var c = $("<div>")
+                c.addClass("card")
+                var d = $("<div>")
+                d.addClass("card-image")
+                var e = $("<img>")
+                e.attr("src", imgURL)
+                var f = $("<span>")
+                f.addClass("card-title")
+                f.text(name)
+                var g = $("<div>")
+                g.addClass("card-content")
+                var cardBody1 = $("<p>")
+                var a = $("<a>")
                 a.attr("href", websiteURL)
-                a.text("view website")
-                p7.append(a)
-                div.append(header);
-                div.append(img);
-                div.append(p1)
-                div.append(p2)
-                div.append(p3)
-                div.append(p4)
-                div.append(p5)
-                div.append(p6)
-                div.append(p7)
-                $("#results").append(div)
+                a.text("View Website")
+                cardBody1.append(a)
+                var cardBody2 = $("<h3>")
+                if(isClosed){
+                    cardBody2.text("Currently Closed")
+                } else {
+                    cardBody2.text("Now Open")
+                }
+                var cardBody3 = $("<h3>")
+                cardBody3.text(address)
+                var cardBody4 = $("<h3>")
+                cardBody4.text(phone)
+                var cardBody5 = $("<h3>")
+                cardBody5.text(price)
+                var cardBody6 = $("<h3>")
+                cardBody6.text("Yelp rating: " + rating + " stars")
+                g.append(cardBody1,cardBody2, cardBody3, cardBody4, cardBody5, cardBody6)
+                d.append(f,e)
+                c.append(d,g)
+                b.append(c)
+                card.append(b)
+                //append "card" to the page wherever we want it.
+                $("#results").append(card);
             }
         })
     })
@@ -150,7 +161,7 @@ $(document).ready(function(){
         $("#results").empty();
         // retrieve value from zipcode_inline
         zip = $("#zipcode_inline").val().trim()
-        // ajax call for Restaurants
+        // ajax call for bars
         let zipCode = zip;
         let number = 5
         let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=bars&location=" + zipCode + "&limit=" + number;
@@ -183,85 +194,50 @@ $(document).ready(function(){
                 // website
                 var websiteURL = response.businesses[i].url
 
-                var div = $("<div>")
-                var header = $("<h3>")
-                header.text(name);
-                var img = $("<img>");
-                img.attr("src", imgURL)
-                img.attr("alt", header)
-                var p1 = $("<p>");
-                p1.text(type)
-                var p2 = $("<p2>")
-                if(isClosed){
-                    p2.text("Currently Closed")
-                } else {
-                    p2.text("Open Now")
-                }
-                var p3 = $("<p>")
-                p3.text(address)
-                var p4 = $("<p>");
-                p4.text(phone);
-                p5 = $("<p>");
-                p5.text(price);
-                p6 = $("<p>");
-                p6.text("Yelp rating: " + rating + " stars")
-                p7 = $("<p>")
-                a = $("<a>")
+                var card = $("<div>")
+                card.addClass("row")
+                var b = $("<div>")
+                b.addClass("col s12 m6")
+                var c = $("<div>")
+                c.addClass("card")
+                var d = $("<div>")
+                d.addClass("card-image")
+                var e = $("<img>")
+                e.attr("src", imgURL)
+                var f = $("<span>")
+                f.addClass("card-title")
+                f.text(name)
+                var g = $("<div>")
+                g.addClass("card-content")
+                var cardBody1 = $("<p>")
+                var a = $("<a>")
                 a.attr("href", websiteURL)
-                a.text("view website")
-                p7.append(a)
-                div.append(header);
-                div.append(img);
-                div.append(p1)
-                div.append(p2)
-                div.append(p3)
-                div.append(p4)
-                div.append(p5)
-                div.append(p6)
-                div.append(p7)
-                $("#results").append(div)
+                a.text("View Website")
+                cardBody1.append(a)
+                var cardBody2 = $("<h3>")
+                if(isClosed){
+                    cardBody2.text("Currently Closed")
+                } else {
+                    cardBody2.text("Now Open")
+                }
+                var cardBody3 = $("<h3>")
+                cardBody3.text(address)
+                var cardBody4 = $("<h3>")
+                cardBody4.text(phone)
+                var cardBody5 = $("<h3>")
+                cardBody5.text(price)
+                var cardBody6 = $("<h3>")
+                cardBody6.text("Yelp rating: " + rating + " stars")
+                g.append(cardBody1,cardBody2, cardBody3, cardBody4, cardBody5, cardBody6)
+                d.append(f,e)
+                c.append(d,g)
+                b.append(c)
+                card.append(b)
+                //append "card" to the page wherever we want it.
+                $("#results").append(card);
             }
         })
     })
-
-
-// // ajax call for Bars
-// let zipCode = "32801";
-// let number = 5
-// let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=bars&location=" + zipCode + "&limit=" + number;
-
-// $.ajax({
-//     url: queryURL,
-//     headers:{
-//         'Authorization': 'Bearer h53RmJI935qCD6t1Hz-h2Xc8kq_IjzKtzs-zmXCTsQQDFhkaSX5hO_pXQJMbRZDAxTNcMiy_EnYX44lYJhvUjAPqnrQUwjoyqNPS4Ssd2VRzTMN4RBAgGTPvEW-CXXYx'
-//     },
-//     method: "GET"
-// }).then(function(response){
-//     console.log(response)
-//     // name
-//     console.log(response.businesses[0].name)
-//     // image
-//     console.log(response.businesses[0].image_url)
-//     // type of location
-//     for(var i = 0; i < response.businesses[0].categories.length; i++)
-//     console.log(response.businesses[0].categories[i].title)
-//     // open
-//     if(response.businesses[0].is_closed){
-//         console.log("Closed")
-//     } else {
-//         console.log("Open")
-//     }
-//     // location address
-//     console.log(response.businesses[0].location.address1 + ". " +response.businesses[0].location.city +", " + response.businesses[0].location.state +". "+  response.businesses[0].location.zip_code)
-//     // phone number
-//     console.log(response.businesses[0].phone)
-//     // price
-//     console.log(response.businesses[0].price)
-//     // review
-//     console.log(response.businesses[0].rating)
-//     // url
-//     console.log(response.businesses[0].url)
-// });
 
 })
 
