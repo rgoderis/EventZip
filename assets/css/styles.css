@@ -3,3 +3,7 @@ it slower, make the height a lower number. */
 /* .parallax-container {
     height: "your height here";
   } */
+
+  nav .brand-logo {
+    font-size: 3.5rem;
+  }
