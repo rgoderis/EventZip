@@ -66,13 +66,12 @@ $(document).ready(function(){
 
     // click listener for restaurant button
     $("#rests-btn").on("click", function(){
-        console.log("you clicked the restaurant button");
         // empty results div
         $("#results").empty();
         // retrieve value from zipcode_inline
         zip = $("#zipcode_inline").val().trim()
         // ajax call for Restaurants
-        let zipCode = "32801";
+        let zipCode = zip;
         let number = 5
         let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurants&location=" + zipCode + "&limit=" + number;
             // 
@@ -145,6 +144,85 @@ $(document).ready(function(){
         })
     })
 
+    // set click listener for bars-btn
+    $("#bars-btn").on("click", function(){
+        // empty results div
+        $("#results").empty();
+        // retrieve value from zipcode_inline
+        zip = $("#zipcode_inline").val().trim()
+        // ajax call for Restaurants
+        let zipCode = zip;
+        let number = 5
+        let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=bars&location=" + zipCode + "&limit=" + number;
+            // 
+        $.ajax({
+            url: queryURL,
+            headers:{
+                'Authorization': 'Bearer h53RmJI935qCD6t1Hz-h2Xc8kq_IjzKtzs-zmXCTsQQDFhkaSX5hO_pXQJMbRZDAxTNcMiy_EnYX44lYJhvUjAPqnrQUwjoyqNPS4Ssd2VRzTMN4RBAgGTPvEW-CXXYx'
+            },
+            method: "GET"
+        }).then(function(response){
+            // loop through response results
+            for(var i = 0; i < number; i++){
+                // restaurant name
+                var name = response.businesses[i].name;
+                // img url
+                var imgURL = response.businesses[i].image_url
+                // rest types
+                var type = response.businesses[i].categories[0].title
+                // isClosed
+                var isClosed = response.businesses[i].is_closed
+                // address
+                var address = response.businesses[i].location.address1 + ". " +response.businesses[i].location.city +", " + response.businesses[i].location.state +". "+  response.businesses[i].location.zip_code
+                // phone number
+                var phone = response.businesses[i].phone
+                // price
+                var price = response.businesses[i].price
+                // rating
+                var rating = response.businesses[i].rating
+                // website
+                var websiteURL = response.businesses[i].url
+
+                var div = $("<div>")
+                var header = $("<h3>")
+                header.text(name);
+                var img = $("<img>");
+                img.attr("src", imgURL)
+                img.attr("alt", header)
+                var p1 = $("<p>");
+                p1.text(type)
+                var p2 = $("<p2>")
+                if(isClosed){
+                    p2.text("Currently Closed")
+                } else {
+                    p2.text("Open Now")
+                }
+                var p3 = $("<p>")
+                p3.text(address)
+                var p4 = $("<p>");
+                p4.text(phone);
+                p5 = $("<p>");
+                p5.text(price);
+                p6 = $("<p>");
+                p6.text("Yelp rating: " + rating + " stars")
+                p7 = $("<p>")
+                a = $("<a>")
+                a.attr("href", websiteURL)
+                a.text("view website")
+                p7.append(a)
+                div.append(header);
+                div.append(img);
+                div.append(p1)
+                div.append(p2)
+                div.append(p3)
+                div.append(p4)
+                div.append(p5)
+                div.append(p6)
+                div.append(p7)
+                $("#results").append(div)
+            }
+        })
+    })
 
 
 // // ajax call for Bars
