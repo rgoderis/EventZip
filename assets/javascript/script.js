@@ -2,12 +2,7 @@ var zip;
 
 
 $(document).ready(function(){
-    //initialize parallax for the page
-    document.addEventListener('DOMContentLoaded', function() {
-        var elems = document.querySelectorAll('.parallax');
-        var instances = M.Parallax.init(elems, options);
-      });
-      
+    //initialize parallax for the page  
     $('.parallax').parallax();
 
     // click listener on zipSubmit 
