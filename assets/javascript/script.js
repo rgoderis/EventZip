@@ -5,7 +5,7 @@ $(document).ready(function(){
     //initialize parallax for the page  
     $('.parallax').parallax();
 
-    // click listener on zipSubmit 
+    // click listener on events-btn
     $("#events-btn").on("click", function(){
     // empty results div
     $("#results").empty()
@@ -62,7 +62,83 @@ $(document).ready(function(){
             $("#results").append(div);
         }
     })
-})
+});
+
+// // ajax call for Restaurants
+// let zipCode = "32801";
+// let number = 5
+// let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurants&location=" + zipCode + "&limit=" + number;
+
+// $.ajax({
+//     url: queryURL,
+//     headers:{
+//         'Authorization': 'Bearer h53RmJI935qCD6t1Hz-h2Xc8kq_IjzKtzs-zmXCTsQQDFhkaSX5hO_pXQJMbRZDAxTNcMiy_EnYX44lYJhvUjAPqnrQUwjoyqNPS4Ssd2VRzTMN4RBAgGTPvEW-CXXYx'
+//     },
+//     method: "GET"
+// }).then(function(response){
+//     console.log(response)
+//     // name
+//     console.log(response.businesses[0].name)
+//     // image
+//     console.log(response.businesses[0].image_url)
+//     // type of location
+//     for(var i = 0; i < response.businesses[0].categories.length; i++)
+//     console.log(response.businesses[0].categories[i].title)
+//     // open
+//     if(response.businesses[0].is_closed){
+//         console.log("Closed")
+//     } else {
+//         console.log("Open")
+//     }
+//     // location address
+//     console.log(response.businesses[0].location.address1 + ". " +response.businesses[0].location.city +", " + response.businesses[0].location.state +". "+  response.businesses[0].location.zip_code)
+//     // phone number
+//     console.log(response.businesses[0].phone)
+//     // price
+//     console.log(response.businesses[0].price)
+//     // review
+//     console.log(response.businesses[0].rating)
+//     // url
+//     console.log(response.businesses[0].url)
+// })
+
+// // ajax call for Bars
+// let zipCode = "32801";
+// let number = 5
+// let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=bars&location=" + zipCode + "&limit=" + number;
+
+// $.ajax({
+//     url: queryURL,
+//     headers:{
+//         'Authorization': 'Bearer h53RmJI935qCD6t1Hz-h2Xc8kq_IjzKtzs-zmXCTsQQDFhkaSX5hO_pXQJMbRZDAxTNcMiy_EnYX44lYJhvUjAPqnrQUwjoyqNPS4Ssd2VRzTMN4RBAgGTPvEW-CXXYx'
+//     },
+//     method: "GET"
+// }).then(function(response){
+//     console.log(response)
+//     // name
+//     console.log(response.businesses[0].name)
+//     // image
+//     console.log(response.businesses[0].image_url)
+//     // type of location
+//     for(var i = 0; i < response.businesses[0].categories.length; i++)
+//     console.log(response.businesses[0].categories[i].title)
+//     // open
+//     if(response.businesses[0].is_closed){
+//         console.log("Closed")
+//     } else {
+//         console.log("Open")
+//     }
+//     // location address
+//     console.log(response.businesses[0].location.address1 + ". " +response.businesses[0].location.city +", " + response.businesses[0].location.state +". "+  response.businesses[0].location.zip_code)
+//     // phone number
+//     console.log(response.businesses[0].phone)
+//     // price
+//     console.log(response.businesses[0].price)
+//     // review
+//     console.log(response.businesses[0].rating)
+//     // url
+//     console.log(response.businesses[0].url)
+// });
 
 })
 
