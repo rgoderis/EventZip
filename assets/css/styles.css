@@ -23,3 +23,7 @@ a {
 #results {
     text-align: center;
 }
+.card {
+    max-width: 25em;
+    height: 35em;
+}

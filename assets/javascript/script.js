@@ -37,9 +37,9 @@ $(document).ready(function(){
                     var tickmasterURL = response._embedded.events[i].url;
 
                     var card = $("<div>")
-                    card.addClass("row")
+                    // card.addClass("row")
                     var b = $("<div>")
-                    b.addClass("col s12 m6")
+                    b.addClass("col s6 m6")
                     var c = $("<div>")
                     c.addClass("card")
                     var d = $("<div>")
