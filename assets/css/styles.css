@@ -37,3 +37,7 @@ a {
 .card-title {
     margin-top: 0
 }
+.select-wrapper {
+    position: relative;
+    padding-bottom: 1.15em;
+}
