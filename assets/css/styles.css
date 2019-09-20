@@ -27,3 +27,13 @@ a {
     max-width: 25em;
     height: 35em;
 }
+.resizeImg {
+    max-width: 25em;
+    height: 20em;
+}
+.card-content {
+    padding: 0;
+}
+.card-title {
+    margin-top: 0
+}
