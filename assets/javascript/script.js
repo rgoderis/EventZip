@@ -35,6 +35,7 @@ $(document).ready(function(){
                     var date = response._embedded.events[i].dates.start.localDate;
                     var momentDate = moment(date).format("ddd, MMMM Do YYYY")
                     var startTime = response._embedded.events[i].dates.start.localTime;
+                    var momentTime = moment(startTime, "hh:mm a").format("h:mm a")
                     var venue = response._embedded.events[i]._embedded.venues[0].name;
                     var address = response._embedded.events[i]._embedded.venues[0].address.line1  + " " + response._embedded.events[i]._embedded.venues[0].city.name+ ", " + response._embedded.events[i]._embedded.venues[0].state.name + " " + response._embedded.events[i]._embedded.venues[0].postalCode
                     var tickmasterURL = response._embedded.events[i].url;
@@ -62,7 +63,7 @@ $(document).ready(function(){
                     var cardBody2 = $("<p>")
                     cardBody2.text(momentDate)
                     var cardBody3 = $("<p>")
-                    cardBody3.text("Start Time: "+ startTime)
+                    cardBody3.text("Start Time: "+ momentTime)
                     var cardBody4 = $("<p>")
                     cardBody4.text("Venue: "+ venue)
                     var cardBody5 = $("<p>")
