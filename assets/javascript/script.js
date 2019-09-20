@@ -4,6 +4,7 @@ var zip;
 $(document).ready(function(){
     //initialize parallax for the page  
     $('.parallax').parallax();
+    $('select').formSelect();
 
     // click listener on events-btn
     $("#events-btn").on("click", function(){
