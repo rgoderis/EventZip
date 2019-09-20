@@ -1,6 +1,5 @@
 var zip;
 
-
 $(document).ready(function(){
     //initialize parallax and our form selector for the page  
     $('.parallax').parallax();
@@ -10,6 +9,9 @@ $(document).ready(function(){
     $("#events-btn").on("click", function(){
         // empty results div
         $("#results").empty();
+        // retrieve value from numVal
+        var numVal = $(".numVal").val()
+        var numValInt = parseInt(numVal)
         // sets value to zipcode_inline to zip
         zip = $("#zipcode_inline").val().trim();
         // check to make sure a value is entered in zip
@@ -26,7 +28,7 @@ $(document).ready(function(){
                 method: "GET"
             }).then(function(response){
                 // loop through results
-                for(var i = 0; i < 5; i++){
+                for(var i = 0; i < numValInt; i++){
                     // variables for response calls
                     var eventName = response._embedded.events[i].name;
                     var imgURL = response._embedded.events[i].images[0].url;
@@ -80,6 +82,9 @@ $(document).ready(function(){
     $("#rests-btn").on("click", function(){
         // empty results div
         $("#results").empty();
+        // retrieve value from numVal
+        var numVal = $(".numVal").val()
+        var numValInt = parseInt(numVal)        
         // retrieve value from zipcode_inline
         zip = $("#zipcode_inline").val().trim()
         // check to make sure a value is entered in zip
@@ -89,7 +94,7 @@ $(document).ready(function(){
         } else{
             // ajax call for Restaurants
             let zipCode = zip;
-            let number = 5
+            let number = numValInt
             let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurants&location=" + zipCode + "&limit=" + number;
                 // 
             $.ajax({
@@ -198,6 +203,9 @@ $(document).ready(function(){
     $("#bars-btn").on("click", function(){
         // empty results div
         $("#results").empty();
+        // retrieve value from numVal
+        var numVal = $(".numVal").val()
+        var numValInt = parseInt(numVal)
         // retrieve value from zipcode_inline
         zip = $("#zipcode_inline").val().trim()
         // check to make sure a value is entered in zip
@@ -207,7 +215,7 @@ $(document).ready(function(){
         } else{
             // ajax call for bars
             let zipCode = zip;
-            let number = 5
+            let number = numValInt
             let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=bars&location=" + zipCode + "&limit=" + number;
             
             $.ajax({
@@ -311,6 +319,10 @@ $(document).ready(function(){
     $("#hotels-btn").on("click", function(){
         // empty results div
         $("#results").empty();
+        // retrieve value from numVal
+        var numVal = $(".numVal").val()
+        console.log(numVal)
+        var numValInt = parseInt(numVal)
         // retrieve value from zipcode_inline
         zip = $("#zipcode_inline").val().trim()
         // check to make sure a value is entered in zip
@@ -318,9 +330,10 @@ $(document).ready(function(){
             console.log("plase enter a value")
             return false
         } else{
-            // ajax call for hotel
+            // ajax call for hotels
             let zipCode = zip;
-            let number = 5
+            let number = numValInt
+            console.log(number)
             let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=hotels&location=" + zipCode + "&limit=" + number;
             
             $.ajax({

@@ -41,3 +41,12 @@ a {
     position: relative;
     padding-bottom: 1.15em;
 }
+.portImg {
+    max-width: 230px;
+    height: 100%;
+    width: 100%;
+    max-height: 230px;
+}
+a {
+    color:inherit;
+  }
