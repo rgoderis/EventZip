@@ -45,8 +45,20 @@ a {
     max-width: 230px;
     height: 100%;
     width: 100%;
-    max-height: 230px;
+    max-height: 215px;
 }
 a {
     color:inherit;
   }
+.giveMeBorder {
+    border-color: rgb(81, 164, 154);
+    border-style: solid;
+    border-left: 1px;
+    border-right: 1px;
+    border-top: 0px;
+    border-bottom: 0px;
+    
+}
+.moveMe {
+    margin-bottom: 2em;
+}
