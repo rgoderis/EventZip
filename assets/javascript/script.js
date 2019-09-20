@@ -9,7 +9,7 @@ $(document).ready(function(){
     // click listener on events-btn
     $("#events-btn").on("click", function(){
         // empty results div
-        $("#results").empty()
+        $("#results").empty();
         // sets value to zipcode_inline to zip
         zip = $("#zipcode_inline").val().trim();
         // check to make sure a value is entered in zip
@@ -256,6 +256,11 @@ $(document).ready(function(){
                 }
             })
         }
+    });
+
+    // hotel click listener
+    $("#hotels-btn").on("click", function(){
+        console.log("you clicked me");
     })
 
 })
