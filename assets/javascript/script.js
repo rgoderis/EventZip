@@ -2,7 +2,7 @@ var zip;
 
 
 $(document).ready(function(){
-    //initialize parallax for the page  
+    //initialize parallax and our form selector for the page  
     $('.parallax').parallax();
     $('select').formSelect();
 
@@ -35,9 +35,8 @@ $(document).ready(function(){
                     var venue = response._embedded.events[i]._embedded.venues[0].name;
                     var address = response._embedded.events[i]._embedded.venues[0].address.line1  + " " + response._embedded.events[i]._embedded.venues[0].city.name+ ", " + response._embedded.events[i]._embedded.venues[0].state.name + " " + response._embedded.events[i]._embedded.venues[0].postalCode
                     var tickmasterURL = response._embedded.events[i].url;
-
+                    // dynamically creating a Materialize card for each item our ajax call returns
                     var card = $("<div>")
-                    // card.addClass("row")
                     var b = $("<div>")
                     b.addClass("col s12 m6")
                     var c = $("<div>")
@@ -120,9 +119,8 @@ $(document).ready(function(){
                     var rating = response.businesses[i].rating
                     // website
                     var websiteURL = response.businesses[i].url
-
+                    // dynamically creating a Materialize card for each item our ajax call returns
                     var card = $("<div>")
-                    // card.addClass("row")
                     var b = $("<div>")
                     b.addClass("col s12 m6")
                     var c = $("<div>")
@@ -143,6 +141,7 @@ $(document).ready(function(){
                     a.text("View Website")
                     cardBody1.append(a)
                     var cardBody2 = $("<p>")
+                    //checking if the establishment is closed or open to display on our card
                     if(isClosed){
                         cardBody2.text("Currently Closed")
                     } else {
@@ -161,7 +160,7 @@ $(document).ready(function(){
                     c.append(d,g)
                     b.append(c)
                     card.append(b)
-                    //append "card" to the page wherever we want it.
+                    //appending the completed card to our result div.
                     $("#results").append(card);
                 }
             })
@@ -183,7 +182,7 @@ $(document).ready(function(){
             let zipCode = zip;
             let number = 5
             let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=bars&location=" + zipCode + "&limit=" + number;
-                // 
+            
             $.ajax({
                 url: queryURL,
                 headers:{
@@ -211,9 +210,8 @@ $(document).ready(function(){
                     var rating = response.businesses[i].rating
                     // website
                     var websiteURL = response.businesses[i].url
-
+                    // dynamically creating a Materialize card for each item our ajax call returns
                     var card = $("<div>")
-                    // card.addClass("row")
                     var b = $("<div>")
                     b.addClass("col s12 m6")
                     var c = $("<div>")
@@ -234,6 +232,7 @@ $(document).ready(function(){
                     a.text("View Website")
                     cardBody1.append(a)
                     var cardBody2 = $("<p>")
+                    //checking if the establishment is closed or open to display on our card
                     if(isClosed){
                         cardBody2.text("Currently Closed")
                     } else {
@@ -252,7 +251,7 @@ $(document).ready(function(){
                     c.append(d,g)
                     b.append(c)
                     card.append(b)
-                    //append "card" to the page wherever we want it.
+                    //appending the completed card to our result div.
                     $("#results").append(card);
                 }
             })
