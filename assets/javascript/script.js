@@ -121,7 +121,29 @@ $(document).ready(function(){
                     // price
                     var price = response.businesses[i].price
                     // rating
-                    var rating = response.businesses[i].rating
+                    var rating_val = response.businesses[i].rating
+
+                    var star = function (rating) {
+                        if (rating == 1) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_1.png" };
+                        if (rating == 1.5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_1_half.png" };
+                        if (rating == 2) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_2.png" };
+                        if (rating == 2.5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_2_half.png" };
+                        if (rating == 3) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_3.png" };
+                        if (rating == 3.5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_3_half.png" };
+                        if (rating == 4) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_4.png" };
+                        if (rating == 4.5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_4_half.png" };
+                        if (rating == 5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_5.png" };
+                };
+				
                     // website
                     var websiteURL = response.businesses[i].url
                     // dynamically creating a Materialize card for each item our ajax call returns
@@ -158,8 +180,13 @@ $(document).ready(function(){
                     cardBody4.text(phone)
                     var cardBody5 = $("<p>")
                     cardBody5.text(price)
-                    var cardBody6 = $("<p>")
-                    cardBody6.text("Yelp rating: " + rating + " stars")
+                    var cardBody6 = $("<img>")
+                    cardBody6.attr("src", star(rating_val))
+
+                   
+                //p6.attr("src", star(rating_val))  
+
+
                     g.append(f, cardBody1,cardBody2, cardBody3, cardBody4, cardBody5, cardBody6)
                     d.append(e)
                     c.append(d,g)
@@ -215,7 +242,29 @@ $(document).ready(function(){
                     // price
                     var price = response.businesses[i].price
                     // rating
-                    var rating = response.businesses[i].rating
+                    var rating_val = response.businesses[i].rating
+
+                     var star = function (rating) {
+                        if (rating == 1) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_1.png" };
+                        if (rating == 1.5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_1_half.png" };
+                        if (rating == 2) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_2.png" };
+                        if (rating == 2.5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_2_half.png" };
+                        if (rating == 3) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_3.png" };
+                        if (rating == 3.5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_3_half.png" };
+                        if (rating == 4) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_4.png" };
+                        if (rating == 4.5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_4_half.png" };
+                        if (rating == 5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_5.png" };
+                    };
+                    
                     // website
                     var websiteURL = response.businesses[i].url
                     // dynamically creating a Materialize card for each item our ajax call returns
@@ -252,8 +301,8 @@ $(document).ready(function(){
                     cardBody4.text(phone)
                     var cardBody5 = $("<p>")
                     cardBody5.text(price)
-                    var cardBody6 = $("<p>")
-                    cardBody6.text("Yelp rating: " + rating + " stars")
+                    var cardBody6 = $("<img>")
+                    cardBody6.attr("src", star(rating_val))
                     g.append(f, cardBody1,cardBody2, cardBody3, cardBody4, cardBody5, cardBody6)
                     d.append(e)
                     c.append(d,g)
@@ -311,7 +360,29 @@ $(document).ready(function(){
                     // price
                     var price = response.businesses[i].price
                     // rating
-                    var rating = response.businesses[i].rating
+                    var rating_val = response.businesses[i].rating
+
+                    var star = function (rating) {
+                        if (rating == 1) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_1.png" };
+                        if (rating == 1.5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_1_half.png" };
+                        if (rating == 2) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_2.png" };
+                        if (rating == 2.5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_2_half.png" };
+                        if (rating == 3) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_3.png" };
+                        if (rating == 3.5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_3_half.png" };
+                        if (rating == 4) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_4.png" };
+                        if (rating == 4.5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_4_half.png" };
+                        if (rating == 5) {
+                            return "assets/images/yelp_stars/web_and_ios/small/small_5.png" };
+                    };
+                    
                     // website
                     var websiteURL = response.businesses[i].url
                     // dynamically creating a Materialize card for each item our ajax call returns
@@ -348,8 +419,8 @@ $(document).ready(function(){
                     cardBody4.text(phone)
                     var cardBody5 = $("<p>")
                     cardBody5.text(price)
-                    var cardBody6 = $("<p>")
-                    cardBody6.text("Yelp rating: " + rating + " stars")
+                    var cardBody6 = $("<img>")
+                    cardBody6.attr("src", star(rating_val))
                     g.append(f, cardBody1,cardBody2, cardBody3, cardBody4, cardBody5, cardBody6)
                     d.append(e)
                     c.append(d,g)
