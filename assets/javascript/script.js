@@ -33,6 +33,7 @@ $(document).ready(function(){
                     var eventName = response._embedded.events[i].name;
                     var imgURL = response._embedded.events[i].images[0].url;
                     var date = response._embedded.events[i].dates.start.localDate;
+                    var momentDate = moment(date).format("ddd, MMMM Do YYYY")
                     var startTime = response._embedded.events[i].dates.start.localTime;
                     var venue = response._embedded.events[i]._embedded.venues[0].name;
                     var address = response._embedded.events[i]._embedded.venues[0].address.line1  + " " + response._embedded.events[i]._embedded.venues[0].city.name+ ", " + response._embedded.events[i]._embedded.venues[0].state.name + " " + response._embedded.events[i]._embedded.venues[0].postalCode
@@ -59,7 +60,7 @@ $(document).ready(function(){
                     a.text("Buy Tickets Here")
                     cardBody1.append(a)
                     var cardBody2 = $("<p>")
-                    cardBody2.text("Date: " + date)
+                    cardBody2.text(momentDate)
                     var cardBody3 = $("<p>")
                     cardBody3.text("Start Time: "+ startTime)
                     var cardBody4 = $("<p>")
