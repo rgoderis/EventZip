@@ -12,11 +12,12 @@
     <!-- link for using google Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <!-- font awesome icon kit -->
     <script src="https://kit.fontawesome.com/6e04967871.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <!-- Here is our nav bar in our header -->
+    <!-- nav bar below. links still undecided. -->
     <header>
         <nav>
             <div class="nav-wrapper">
@@ -29,7 +30,7 @@
     </header>
 
     <main>
-        <!-- parallax below -->
+        <!-- banner image with a parallax scroll effect-->
         <div class="parallax-container">
             <div class="parallax"><img src="assets/images/parallaxBackground.jpg"></div>
         </div>
@@ -48,7 +49,7 @@
 
         </div>
 
-        <!-- Create inputForm Row -->
+        <!-- wrapper for our forms-->
         <div id="inputForm">
             <form>
                 <div class="row">
@@ -56,16 +57,16 @@
                         Enter Zipcode here:
                         <div class="input-field inline">
 
-                            <!-- This is the id below.  You will target ffor zipcode value -->
+                            <!-- TOur inputs we pull into our ajax calls to get back data. -->
                             <input id="zipcode_inline" type="text" class="validate">
                             <label for="zipcode_inline">Zipcode</label>
                             <span class="helper-text" data-error="wrong" data-success="right"></span>
                         </div>
 
-                        <!-- Created the drop down for the amount of results user would like.  -->
+                        <!--the drop down for the amount of results user would like.  -->
                         <div class="input-field inline">
                             <select>
-                                <option value="" disabled selected>Choose your option</option>
+                                <option value="" disabled selected>Number of Results</option>
                                 <option value="1">5</option>
                                 <option value="2">10</option>
                                 <option value="3">15</option>
@@ -76,19 +77,14 @@
 
 
             </form>
-
-
-
         </div>
         </div>
         </div>
-
+        <!-- This is the container and div we dynamically append the result cards into. -->
         <div class="container">
-            <div class="row" id="results">White Space!!</div>
+            <div class="row" id="results"></div>
         </div>
     </main>
-
-
 
     <footer class="page-footer">
         <div class="container">
@@ -111,7 +107,6 @@
             </div>
         </div>
     </footer>
-
 
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
