@@ -9,7 +9,7 @@ $(document).ready(function(){
     // click listener on events-btn
     $("#events-btn").on("click", function(){
         // empty results div
-        $("#results").empty()
+        $("#results").empty();
         // sets value to zipcode_inline to zip
         zip = $("#zipcode_inline").val().trim();
         // check to make sure a value is entered in zip
@@ -256,7 +256,97 @@ $(document).ready(function(){
                 }
             })
         }
-    })
+    });
 
+    // hotel click listener
+    $("#hotels-btn").on("click", function(){
+        // empty results div
+        $("#results").empty();
+        // retrieve value from zipcode_inline
+        zip = $("#zipcode_inline").val().trim()
+        // check to make sure a value is entered in zip
+        if(zip === ""){
+            console.log("plase enter a value")
+            return false
+        } else{
+            // ajax call for bars
+            let zipCode = zip;
+            let number = 5
+            let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=hotels&location=" + zipCode + "&limit=" + number;
+            
+            $.ajax({
+                url: queryURL,
+                headers:{
+                    'Authorization': 'Bearer h53RmJI935qCD6t1Hz-h2Xc8kq_IjzKtzs-zmXCTsQQDFhkaSX5hO_pXQJMbRZDAxTNcMiy_EnYX44lYJhvUjAPqnrQUwjoyqNPS4Ssd2VRzTMN4RBAgGTPvEW-CXXYx'
+                },
+                method: "GET"
+            }).then(function(response){
+                // loop through response results
+                for(var i = 0; i < number; i++){
+                    // restaurant name
+                    var name = response.businesses[i].name;
+                    // img url
+                    var imgURL = response.businesses[i].image_url
+                    // rest types
+                    var type = response.businesses[i].categories[0].title
+                    // isClosed
+                    var isClosed = response.businesses[i].is_closed
+                    // address
+                    var address = response.businesses[i].location.address1 + ". " +response.businesses[i].location.city +", " + response.businesses[i].location.state +". "+  response.businesses[i].location.zip_code
+                    // phone number
+                    var phone = response.businesses[i].phone
+                    // price
+                    var price = response.businesses[i].price
+                    // rating
+                    var rating = response.businesses[i].rating
+                    // website
+                    var websiteURL = response.businesses[i].url
+                    // dynamically creating a Materialize card for each item our ajax call returns
+                    var card = $("<div>")
+                    var b = $("<div>")
+                    b.addClass("col s12 m6")
+                    var c = $("<div>")
+                    c.addClass("card hoverable")
+                    var d = $("<div>")
+                    d.addClass("card-image")
+                    var e = $("<img>")
+                    e.attr("src", imgURL)
+                    e.addClass("resizeImg")
+                    var f = $("<h3>")
+                    f.addClass("card-title")
+                    f.text(name)
+                    var g = $("<div>")
+                    g.addClass("card-content")
+                    var cardBody1 = $("<p>")
+                    var a = $("<a>")
+                    a.attr("href", websiteURL)
+                    a.text("View Website")
+                    cardBody1.append(a)
+                    var cardBody2 = $("<p>")
+                    //checking if the establishment is closed or open to display on our card
+                    if(isClosed){
+                        cardBody2.text("Currently Closed")
+                    } else {
+                        cardBody2.text("Now Open")
+                    }
+                    var cardBody3 = $("<p>")
+                    cardBody3.text(address)
+                    var cardBody4 = $("<p>")
+                    cardBody4.text(phone)
+                    var cardBody5 = $("<p>")
+                    cardBody5.text(price)
+                    var cardBody6 = $("<p>")
+                    cardBody6.text("Yelp rating: " + rating + " stars")
+                    g.append(f, cardBody1,cardBody2, cardBody3, cardBody4, cardBody5, cardBody6)
+                    d.append(e)
+                    c.append(d,g)
+                    b.append(c)
+                    card.append(b)
+                    //appending the completed card to our result div.
+                    $("#results").append(card);
+                }
+            })
+        }
+    });
 })
 
