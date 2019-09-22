@@ -43,9 +43,9 @@ a {
     padding-bottom: 1.15em;
 }
 .portImg {
-    max-width: 230px;
-    height: 100%;
-    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
     max-height: 215px;
 }
 a {
@@ -62,4 +62,7 @@ a {
 }
 .moveMe {
     margin-bottom: 2em;
+}
+.page-footer .footer-copyright {
+    background-color: #ee6e73;
 }
