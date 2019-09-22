@@ -5,6 +5,19 @@ $(document).ready(function(){
     $('.parallax').parallax();
     $('select').formSelect();
 
+    //function for weather AJAX
+    function weather() {
+        let zip = $("#zipcode_inline").val().trim();
+        let appID = "522ed4fdf6244518d41a9728265e080e"
+        let queryURL = "https://api.openweathermap.org/data/2.5/weather?zip="+ zip +"&units=imperial&appid="+ appID
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response){
+            console.log(response)
+        })
+    }
+
     // click listener on events-btn
     $("#events-btn").on("click", function(){
         // empty results div
@@ -19,6 +32,7 @@ $(document).ready(function(){
             console.log("plase enter a value")
             return false
         } else{
+            weather();
             // code for ticketmaster API
             let zipCode = zip
             let key = "&apikey=YnArdwWNV6XCMfq0SFhg1hk3Dj8RPvTm";
