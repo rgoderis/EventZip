@@ -41,6 +41,7 @@ a {
 .select-wrapper {
     position: relative;
     padding-bottom: 1.15em;
+    margin-top: 1.1rem;
 }
 .portImg {
     margin-right: auto;
