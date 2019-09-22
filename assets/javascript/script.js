@@ -22,6 +22,7 @@ $(document).ready(function(){
     $("#events-btn").on("click", function(){
         // empty results div
         $("#results").empty();
+        $("#displayParam").empty();
         // retrieve value from numVal
         var numVal = $(".numVal").val()
         var numValInt = parseInt(numVal)
@@ -41,54 +42,63 @@ $(document).ready(function(){
                 url: queryURL,
                 method: "GET"
             }).then(function(response){
-                // loop through results
-                for(var i = 0; i < numValInt; i++){
-                    // variables for response calls
-                    var eventName = response._embedded.events[i].name;
-                    var imgURL = response._embedded.events[i].images[0].url;
-                    var date = response._embedded.events[i].dates.start.localDate;
-                    var momentDate = moment(date).format("ddd, MMMM Do YYYY")
-                    var startTime = response._embedded.events[i].dates.start.localTime;
-                    var momentTime = moment(startTime, "hh:mm a").format("h:mm a")
-                    var venue = response._embedded.events[i]._embedded.venues[0].name;
-                    var address = response._embedded.events[i]._embedded.venues[0].address.line1  + " " + response._embedded.events[i]._embedded.venues[0].city.name+ ", " + response._embedded.events[i]._embedded.venues[0].state.name + " " + response._embedded.events[i]._embedded.venues[0].postalCode
-                    var tickmasterURL = response._embedded.events[i].url;
-                    // dynamically creating a Materialize card for each item our ajax call returns
-                    var card = $("<div>")
-                    var b = $("<div>")
-                    b.addClass("col s12 m6")
-                    var c = $("<div>")
-                    c.addClass("card hoverable")
-                    var d = $("<div>")
-                    d.addClass("card-image")
-                    var e = $("<img>")
-                    e.attr("src", imgURL)
-                    e.addClass("resizeImg")
-                    var f = $("<h3>")
-                    f.addClass("card-title")
-                    f.text(eventName)
-                    var g = $("<div>")
-                    g.addClass("card-content")
-                    var cardBody1 = $("<p>")
-                    var a = $("<a>")
-                    a.attr("href", tickmasterURL)
-                    a.text("Buy Tickets Here")
-                    cardBody1.append(a)
-                    var cardBody2 = $("<p>")
-                    cardBody2.text(momentDate)
-                    var cardBody3 = $("<p>")
-                    cardBody3.text("Start Time: "+ momentTime)
-                    var cardBody4 = $("<p>")
-                    cardBody4.text("Venue: "+ venue)
-                    var cardBody5 = $("<p>")
-                    cardBody5.text(address)
-                    g.append(f,cardBody1,cardBody2, cardBody3, cardBody4, cardBody5)
-                    d.append(e)
-                    c.append(d,g)
-                    b.append(c)
-                    card.append(b)
-                    //append "card" to the page wherever we want it.
-                    $("#results").append(card);
+                console.log(response)
+                if(response.page.totalElements === 0){
+                    // display no results found in that area
+                    $("#displayParam").empty();
+                    $("#results").empty();
+                    $("#displayParam").append("<h3>Sorry, no results were found in that area.  Please try another location </h3>")
+                    return false;
+                } else {
+                    // loop through results
+                    for(var i = 0; i < numValInt; i++){
+                        // variables for response calls
+                        var eventName = response._embedded.events[i].name;
+                        var imgURL = response._embedded.events[i].images[0].url;
+                        var date = response._embedded.events[i].dates.start.localDate;
+                        var momentDate = moment(date).format("ddd, MMMM Do YYYY")
+                        var startTime = response._embedded.events[i].dates.start.localTime;
+                        var momentTime = moment(startTime, "hh:mm a").format("h:mm a")
+                        var venue = response._embedded.events[i]._embedded.venues[0].name;
+                        var address = response._embedded.events[i]._embedded.venues[0].address.line1  + " " + response._embedded.events[i]._embedded.venues[0].city.name+ ", " + response._embedded.events[i]._embedded.venues[0].state.name + " " + response._embedded.events[i]._embedded.venues[0].postalCode
+                        var tickmasterURL = response._embedded.events[i].url;
+                        // dynamically creating a Materialize card for each item our ajax call returns
+                        var card = $("<div>")
+                        var b = $("<div>")
+                        b.addClass("col s12 m6")
+                        var c = $("<div>")
+                        c.addClass("card hoverable")
+                        var d = $("<div>")
+                        d.addClass("card-image")
+                        var e = $("<img>")
+                        e.attr("src", imgURL)
+                        e.addClass("resizeImg")
+                        var f = $("<h3>")
+                        f.addClass("card-title")
+                        f.text(eventName)
+                        var g = $("<div>")
+                        g.addClass("card-content")
+                        var cardBody1 = $("<p>")
+                        var a = $("<a>")
+                        a.attr("href", tickmasterURL)
+                        a.text("Buy Tickets Here")
+                        cardBody1.append(a)
+                        var cardBody2 = $("<p>")
+                        cardBody2.text(momentDate)
+                        var cardBody3 = $("<p>")
+                        cardBody3.text("Start Time: "+ momentTime)
+                        var cardBody4 = $("<p>")
+                        cardBody4.text("Venue: "+ venue)
+                        var cardBody5 = $("<p>")
+                        cardBody5.text(address)
+                        g.append(f,cardBody1,cardBody2, cardBody3, cardBody4, cardBody5)
+                        d.append(e)
+                        c.append(d,g)
+                        b.append(c)
+                        card.append(b)
+                        //append "card" to the page wherever we want it.
+                        $("#results").append(card);
+                    }
                 }
             });
         }
@@ -98,6 +108,7 @@ $(document).ready(function(){
     $("#rests-btn").on("click", function(){
         // empty results div
         $("#results").empty();
+        $("#displayParam").empty();
         // retrieve value from numVal
         var numVal = $(".numVal").val()
         var numValInt = parseInt(numVal)        
@@ -198,11 +209,7 @@ $(document).ready(function(){
                     cardBody5.text(price)
                     var cardBody6 = $("<img>")
                     cardBody6.attr("src", star(rating_val))
-
-                   
                 //p6.attr("src", star(rating_val))  
-
-
                     g.append(f, cardBody1,cardBody2, cardBody3, cardBody4, cardBody5, cardBody6)
                     d.append(e)
                     c.append(d,g)
@@ -219,6 +226,7 @@ $(document).ready(function(){
     $("#bars-btn").on("click", function(){
         // empty results div
         $("#results").empty();
+        $("#displayParam").empty();
         // retrieve value from numVal
         var numVal = $(".numVal").val()
         var numValInt = parseInt(numVal)
@@ -335,6 +343,7 @@ $(document).ready(function(){
     $("#hotels-btn").on("click", function(){
         // empty results div
         $("#results").empty();
+        $("#displayParam").empty();
         // retrieve value from numVal
         var numVal = $(".numVal").val()
         console.log(numVal)
