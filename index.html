@@ -54,40 +54,33 @@
                     <div class="col s12">
                         Enter Zipcode here:
                         <div class="input-field inline">
-
                             <!-- TOur inputs we pull into our ajax calls to get back data. -->
                             <input id="zipcode_inline" type="text" class="validate">
-                            <label for="zipcode_inline">Zipcode</label>
-                            <span class="helper-text" data-error="wrong"
-                                data-success="Oh no, you actually live there?"></span>
+                            <label for="zipcode_inline">Zipcode</label> 
                         </div>
-
                         <!--the drop down for the amount of results user would like.  -->
                         <div class="input-field inline">
                             <select class="numVal">
-                                <!-- <option class="numVal" value="5" disabled selected>Number of Results</option> -->
-                                <option  value="5">5</option>
+                                <option value="5" disabled selected>Number of Results</option>
+                                <option value="5">5</option>
                                 <option value="10">10</option>
                                 <option value="15">15</option>
                             </select>
-                            <label>Results Total</label>
                         </div>
                     </div>
-
-
             </form>
-        </div>
-        </div>
         </div>
         <!-- This is the container and div we dynamically append the result cards into. -->
         <div class="container">
+            <div id="displayParam"></div>
+            
             <div class="row" id="results"></div>
         </div>
     </main>
 
     <footer class="page-footer">
         <div>
-            <h5 class="center">Development Team</h5>
+            <h5 class="center moveMe">Development Team</h5>
         </div>
         <div class="container">
             <div class="row">
@@ -98,13 +91,13 @@
                     <p class="teamRole center">Project Manager / Data</p>
                     <!-- icons below with links. -->
                     <div class="row valign-wrapper">
-                        <div class="col s4 center-align">
+                        <div class="col s4 right-align">
                             <a href="#"><i class="fab fa-github small"></i></a>
                         </div>
                         <div class="col s4 center-align">
                             <a href="#"><i class="fab fa-linkedin small"></i></a>
                         </div>
-                        <div class="col s4 center-align">
+                        <div class="col s4 left-align">
                             <a href="#"><i class="fas fa-folder-open small"></i></a>
                         </div>
                     </div>
@@ -113,16 +106,16 @@
                     <!--portfolio 2-->
                     <img src="assets/images/cam.jpg" alt="Placeholder" class="portImg circle responsive-img">
                     <p class="teamName center">Cameron Kopel</p>
-                    <p class="teamRole center">UI/UX</p>
+                    <p class="teamRole center">UX/UI</p>
                     <!-- icons below with links. -->
                     <div class="row valign-wrapper">
-                            <div class="col s4 center-align">
+                            <div class="col s4 right-align">
                                 <a href="#"><i class="fab fa-github small"></i></a>
                             </div>
                             <div class="col s4 center-align">
                                 <a href="#"><i class="fab fa-linkedin small"></i></a>
                             </div>
-                            <div class="col s4 center-align">
+                            <div class="col s4 left-align">
                                 <a href="#"><i class="fas fa-folder-open small"></i></a>
                             </div>
                         </div>
@@ -131,16 +124,16 @@
                     <!--portfolio 3-->
                     <img src="assets/images/david.png" alt="Placeholder" class="portImg circle responsive-img">
                     <p class="teamName center">David Lopez</p>
-                    <p class="teamRole center">UI/UX</p>
+                    <p class="teamRole center">UX/UI</p>
                     <!-- icons below with links. -->
                     <div class="row valign-wrapper">
-                            <div class="col s4 center-align">
+                            <div class="col s4 right-align">
                                 <a href="#"><i class="fab fa-github small"></i></a>
                             </div>
                             <div class="col s4 center-align">
                                 <a href="#"><i class="fab fa-linkedin small"></i></a>
                             </div>
-                            <div class="col s4 center-align">
+                            <div class="col s4 left-align">
                                 <a href="#"><i class="fas fa-folder-open small"></i></a>
                             </div>
                         </div>
@@ -152,13 +145,13 @@
                     <p class="teamRole center">Data</p>
                     <!-- icons below with links. -->
                     <div class="row valign-wrapper">
-                            <div class="col s4 center-align">
+                            <div class="col s4 right-align">
                                 <a href="#"><i class="fab fa-github small"></i></a>
                             </div>
                             <div class="col s4 center-align">
                                 <a href="#"><i class="fab fa-linkedin small"></i></a>
                             </div>
-                            <div class="col s4 center-align">
+                            <div class="col s4 left-align">
                                 <a href="#"><i class="fas fa-folder-open small"></i></a>
                             </div>
                         </div>
@@ -168,9 +161,8 @@
         </div>
         </div>
         <div class="footer-copyright">
-            <div class="container">
-                © 2014 Copyright Text
-                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            <div class="container center">
+                © Copyright 2019
             </div>
         </div>
     </footer>
@@ -181,6 +173,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- font awesome icon kit -->
     <script src="https://kit.fontawesome.com/6e04967871.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="assets/javascript/script.js"></script>
 </body>
 
