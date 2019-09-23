@@ -139,7 +139,7 @@ $(document).ready(function(){
                 //appending the completed card to our result div.
                 $("#results").append(card);
             }
-            $("#displayParam").append("<h3>You are viewing "+ btnClicked + " in " + zip + "</h3>");
+            $("#displayParam").append("<h3 class='text-center'>You are viewing "+ btnClicked + " in " + zip + "</h3>");
         })
     }
 
@@ -225,7 +225,7 @@ $(document).ready(function(){
                         //append "card" to the page wherever we want it.
                         $("#results").append(card);
                     };
-                    $("#displayParam").append("<h3>You are viewing "+ btnClicked + " in " + zip + "</h3>");
+                    $("#displayParam").append("<h3 class='text-center'>You are viewing "+ btnClicked + " in " + zip + "</h3>");
                 }
             });
         }
