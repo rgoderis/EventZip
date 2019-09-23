@@ -23,6 +23,9 @@ a {
 
 #displayParam{
     color:  rgb(81, 164, 154);
+    text-align: center;
+    font-size: 1.3rem;
+    
 }
 
 #results {
