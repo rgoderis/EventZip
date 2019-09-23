@@ -19,12 +19,12 @@ $(document).ready(function(){
             let temp = response.main.temp;
             let city = response.name;
             let conditions = response.weather[0].description;
-            let weatherDiv = $("<div>")
-            let cityP = $("<h5 class=''>")
+            let weatherDiv = $("<div class='weatherSpace'>")
+            let cityP = $("<h5 class='padded'>")
             cityP.text("Showing results for: " +city)
-            let tempP = $("<p class=''>")
+            let tempP = $("<p class='padded'>")
             tempP.text("Current Temperature: " +temp)
-            let conditionsP = $("<p class='upperCaseMe '>")
+            let conditionsP = $("<p class='upperCaseMe padded'>")
             conditionsP.text("Current Conditions: " +conditions)
             weatherDiv.append(cityP, tempP, conditionsP)
             $("#weather").append(weatherDiv)
