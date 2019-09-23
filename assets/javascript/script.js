@@ -7,6 +7,7 @@ $(document).ready(function(){
 
     //function for weather AJAX
     function weather() {
+        $("#weather").empty()
         let zip = $("#zipcode_inline").val().trim();
         let appID = "522ed4fdf6244518d41a9728265e080e"
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?zip="+ zip +"&units=imperial&appid="+ appID
@@ -15,6 +16,18 @@ $(document).ready(function(){
             method: "GET"
         }).then(function(response){
             console.log(response)
+            let temp = response.main.temp;
+            let city = response.name;
+            let conditions = response.weather[0].description;
+            let weatherDiv = $("<div>")
+            let cityP = $("<h5 class=''>")
+            cityP.text("Showing results for: " +city)
+            let tempP = $("<p class=''>")
+            tempP.text("Current Temperature: " +temp)
+            let conditionsP = $("<p class='upperCaseMe '>")
+            conditionsP.text("Current Conditions: " +conditions)
+            weatherDiv.append(cityP, tempP, conditionsP)
+            $("#weather").append(weatherDiv)
         })
     }
 
@@ -119,6 +132,7 @@ $(document).ready(function(){
             console.log("plase enter a value")
             return false
         } else{
+            weather();
             // ajax call for Restaurants
             let zipCode = zip;
             let number = numValInt
@@ -250,6 +264,7 @@ $(document).ready(function(){
             console.log("plase enter a value")
             return false
         } else{
+            weather();
             // ajax call for bars
             let zipCode = zip;
             let number = numValInt
@@ -381,6 +396,7 @@ $(document).ready(function(){
             console.log("plase enter a value")
             return false
         } else{
+            weather();
             // ajax call for hotels
             let zipCode = zip;
             let number = numValInt
