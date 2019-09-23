@@ -73,3 +73,6 @@ a {
 .page-footer .footer-copyright {
     background-color: #ee6e73;
 }
+.upperCaseMe {
+    text-transform: capitalize;
+}
