@@ -22,12 +22,12 @@ a {
 }
 
 #displayParam{
-    border: red solid 1px;
+   
     color:  rgb(81, 164, 154);
 }
 
 #results {
-    border: blue solid 1px;
+    
     text-align: center;
 }
 .card {
