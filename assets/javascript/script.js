@@ -1,4 +1,5 @@
 var zip;
+var btnClicked;
 
 $(document).ready(function(){
     //initialize parallax and our form selector for the page  
@@ -31,8 +32,120 @@ $(document).ready(function(){
         })
     }
 
+    function yelpCall (){
+        // retrieve value from numVal
+        var numVal = $(".numVal").val()
+        var numValInt = parseInt(numVal)        
+        // retrieve value from zipcode_inline
+        // ajax call
+        let zipCode = zip;
+        let number = numValInt
+        let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=" + btnClicked +"&location=" + zipCode + "&limit=" + number;
+        $.ajax({
+            url: queryURL,
+            headers:{
+                'Authorization': 'Bearer h53RmJI935qCD6t1Hz-h2Xc8kq_IjzKtzs-zmXCTsQQDFhkaSX5hO_pXQJMbRZDAxTNcMiy_EnYX44lYJhvUjAPqnrQUwjoyqNPS4Ssd2VRzTMN4RBAgGTPvEW-CXXYx'
+            },
+            method: "GET"
+        }).then(function(response){
+            // loop through response results
+            for(var i = 0; i < number; i++){
+                // restaurant name
+                var name = response.businesses[i].name;
+                // img url
+                var imgURL = response.businesses[i].image_url
+                // rest types
+                var type = response.businesses[i].categories[0].title
+                // isClosed
+                var isClosed = response.businesses[i].is_closed
+                // address
+                var address = response.businesses[i].location.address1 + ". " +response.businesses[i].location.city +", " + response.businesses[i].location.state +". "+  response.businesses[i].location.zip_code
+                // phone number
+                var phone = response.businesses[i].phone
+                // price
+                var price = response.businesses[i].price
+                // rating
+                var rating_val = response.businesses[i].rating
+                var star = function (rating) {
+                    if (rating == 1) {
+                        return "assets/images/yelp_stars/web_and_ios/small/small_1.png" };
+                    if (rating == 1.5) {
+                        return "assets/images/yelp_stars/web_and_ios/small/small_1_half.png" };
+                    if (rating == 2) {
+                        return "assets/images/yelp_stars/web_and_ios/small/small_2.png" };
+                    if (rating == 2.5) {
+                        return "assets/images/yelp_stars/web_and_ios/small/small_2_half.png" };
+                    if (rating == 3) {
+                        return "assets/images/yelp_stars/web_and_ios/small/small_3.png" };
+                    if (rating == 3.5) {
+                        return "assets/images/yelp_stars/web_and_ios/small/small_3_half.png" };
+                    if (rating == 4) {
+                        return "assets/images/yelp_stars/web_and_ios/small/small_4.png" };
+                    if (rating == 4.5) {
+                        return "assets/images/yelp_stars/web_and_ios/small/small_4_half.png" };
+                    if (rating == 5) {
+                        return "assets/images/yelp_stars/web_and_ios/small/small_5.png" };
+            };
+                // website
+                var websiteURL = response.businesses[i].url
+                //logo image for yelp
+                var imageObject = {};
+                var logo = imageObject.src = "assets/images/Yelp Burst/Screen/Small_Yelp_burst_positive_RGB.png" 
+                // dynamically creating a Materialize card for each item our ajax call returns
+                var card = $("<div>")
+                var b = $("<div>")
+                b.addClass("col s12 m6")
+                var c = $("<div>")
+                c.addClass("card hoverable")
+                var d = $("<div>")
+                d.addClass("card-image")
+                var e = $("<img>")
+                e.attr("src", imgURL)
+                e.addClass("resizeImg")
+                var f = $("<h3>")
+                f.addClass("card-title")
+                f.text(name)
+                var g = $("<div>")                   
+                g.addClass("card-content")
+                var cardBody1 = $("<p>");
+                var a = $("<a>");
+                a.attr("href", websiteURL);
+                var imgYelp = $("<img>");
+                imgYelp.attr("src", logo);
+                a.append("Visit on");
+                a.append(imgYelp);
+                cardBody1.append(a);
+                var cardBody2 = $("<p>")
+                //checking if the establishment is closed or open to display on our card
+                if(isClosed){
+                    cardBody2.text("Currently Closed")
+                } else {
+                    cardBody2.text("Now Open")
+                }
+                var cardBody3 = $("<p>")
+                cardBody3.text(address)
+                var cardBody4 = $("<p>")
+                cardBody4.text(phone)
+                var cardBody5 = $("<p>")
+                cardBody5.text(price)
+                //displaying appropiate yelp star ratings graphics in accordance with Yelp Fusion guidelines
+                var cardBody6 = $("<img>")
+                cardBody6.attr("src", star(rating_val))
+                g.append(f, cardBody2, cardBody3, cardBody4, cardBody5, cardBody6, cardBody1)
+                d.append(e)
+                c.append(d,g)
+                b.append(c)
+                card.append(b)
+                //appending the completed card to our result div.
+                $("#results").append(card);
+            }
+            $("#displayParam").append("<h3>You are viewing "+ btnClicked + " in " + zip + "</h3>");
+        })
+    }
+
     // click listener on events-btn
     $("#events-btn").on("click", function(){
+        btnClicked = $(this).attr("name")
         // empty results div
         $("#results").empty();
         $("#displayParam").empty();
@@ -43,8 +156,7 @@ $(document).ready(function(){
         zip = $("#zipcode_inline").val().trim();
         // check to make sure a value is entered in zip
         if(zip === ""){
-            console.log("plase enter a value") 
-            $("#displayParam").append("Please enter a location you would like to find events for.");
+            $("#displayParam").append("<h3>Please enter a location.</h3>");
             return false
         } else{
             weather();
@@ -113,7 +225,7 @@ $(document).ready(function(){
                         //append "card" to the page wherever we want it.
                         $("#results").append(card);
                     };
-                    $("#displayParam").append("You are viewing events in " + zip);
+                    $("#displayParam").append("<h3>You are viewing "+ btnClicked + " in " + zip + "</h3>");
                 }
             });
         }
@@ -121,403 +233,58 @@ $(document).ready(function(){
 
     // click listener for restaurant button
     $("#rests-btn").on("click", function(){
+        btnClicked = $(this).attr("name")
         // empty results div
         $("#results").empty();
         $("#displayParam").empty();
-        // retrieve value from numVal
-        var numVal = $(".numVal").val()
-        var numValInt = parseInt(numVal)        
         // retrieve value from zipcode_inline
         zip = $("#zipcode_inline").val().trim()
         // check to make sure a value is entered in zip
         if(zip === ""){
             console.log("plase enter a value")
-            $("#displayParam").append("Please enter a location you would like to find events for.");
+            $("#displayParam").append("<h3>Please enter a location.</h3>");
             return false
         } else{
             weather();
-            // ajax call for Restaurants
-            let zipCode = zip;
-            let number = numValInt
-            let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=restaurants&location=" + zipCode + "&limit=" + number;
-                // 
-            $.ajax({
-                url: queryURL,
-                headers:{
-                    'Authorization': 'Bearer h53RmJI935qCD6t1Hz-h2Xc8kq_IjzKtzs-zmXCTsQQDFhkaSX5hO_pXQJMbRZDAxTNcMiy_EnYX44lYJhvUjAPqnrQUwjoyqNPS4Ssd2VRzTMN4RBAgGTPvEW-CXXYx'
-                },
-                method: "GET"
-            }).then(function(response){
-                // loop through response results
-                for(var i = 0; i < number; i++){
-                    // restaurant name
-                    var name = response.businesses[i].name;
-                    // img url
-                    var imgURL = response.businesses[i].image_url
-                    // rest types
-                    var type = response.businesses[i].categories[0].title
-                    // isClosed
-                    var isClosed = response.businesses[i].is_closed
-                    // address
-                    var address = response.businesses[i].location.address1 + ". " +response.businesses[i].location.city +", " + response.businesses[i].location.state +". "+  response.businesses[i].location.zip_code
-                    // phone number
-                    var phone = response.businesses[i].phone
-                    // price
-                    var price = response.businesses[i].price
-                    // rating
-                    var rating_val = response.businesses[i].rating
-
-                    var star = function (rating) {
-                        if (rating == 1) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_1.png" };
-                        if (rating == 1.5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_1_half.png" };
-                        if (rating == 2) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_2.png" };
-                        if (rating == 2.5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_2_half.png" };
-                        if (rating == 3) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_3.png" };
-                        if (rating == 3.5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_3_half.png" };
-                        if (rating == 4) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_4.png" };
-                        if (rating == 4.5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_4_half.png" };
-                        if (rating == 5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_5.png" };
-                };
-				
-                    // website
-                    var websiteURL = response.businesses[i].url
-                    //logo image for yelp
-                    var imageObject = {};
-                    var logo = imageObject.src = "assets/images/Yelp Burst/Screen/Small_Yelp_burst_positive_RGB.png" 
-                    // dynamically creating a Materialize card for each item our ajax call returns
-
-                    var card = $("<div>")
-
-                    var b = $("<div>")
-                    b.addClass("col s12 m6")
-                    var c = $("<div>")
-                    c.addClass("card hoverable")
-                    var d = $("<div>")
-                    d.addClass("card-image")
-                    var e = $("<img>")
-                    e.attr("src", imgURL)
-                    e.addClass("resizeImg")
-                    var f = $("<h3>")
-                    f.addClass("card-title")
-                    f.text(name)
-                    var g = $("<div>")                   
-                    g.addClass("card-content")
-
-                    var cardBody1 = $("<p>");
-                    var a = $("<a>");
-                    a.attr("href", websiteURL);
-                    var imgYelp = $("<img>");
-                    imgYelp.attr("src", logo);
-                    a.append("Visit on");
-                    a.append(imgYelp);
-                    cardBody1.append(a);
-
-
-                    var cardBody2 = $("<p>")
-                    //checking if the establishment is closed or open to display on our card
-                    if(isClosed){
-                        cardBody2.text("Currently Closed")
-                    } else {
-                        cardBody2.text("Now Open")
-                    }
-                    var cardBody3 = $("<p>")
-                    cardBody3.text(address)
-                    var cardBody4 = $("<p>")
-                    cardBody4.text(phone)
-                    var cardBody5 = $("<p>")
-                    cardBody5.text(price)
-                    //displaying appropiate yelp star ratings graphics in accordance with Yelp Fusion guidelines
-                    var cardBody6 = $("<img>")
-                    cardBody6.attr("src", star(rating_val))
-
-                    g.append(f, cardBody2, cardBody3, cardBody4, cardBody5, cardBody6, cardBody1)
-                  
-                    d.append(e)
-                    c.append(d,g)
-                    b.append(c)
-                    card.append(b)
-                    //appending the completed card to our result div.
-                    $("#results").append(card);
-                }
-                $("#displayParam").append("You are viewing restaurants in " + zip);
-            })
+            yelpCall();
         }
     })
 
     // set click listener for bars-btn
     $("#bars-btn").on("click", function(){
+        btnClicked = $(this).attr("name")
         // empty results div
         $("#results").empty();
         $("#displayParam").empty();
-        // retrieve value from numVal
-        var numVal = $(".numVal").val()
-        var numValInt = parseInt(numVal)
         // retrieve value from zipcode_inline
         zip = $("#zipcode_inline").val().trim()
         // check to make sure a value is entered in zip
         if(zip === ""){
             console.log("plase enter a value")
-            $("#displayParam").append("Please enter a location you would like to find events for.");
+            $("#displayParam").append("<h3>Please enter a location.</h3>");
             return false
         } else{
             weather();
-            // ajax call for bars
-            let zipCode = zip;
-            let number = numValInt
-            let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=bars&location=" + zipCode + "&limit=" + number;
-            
-            $.ajax({
-                url: queryURL,
-                headers:{
-                    'Authorization': 'Bearer h53RmJI935qCD6t1Hz-h2Xc8kq_IjzKtzs-zmXCTsQQDFhkaSX5hO_pXQJMbRZDAxTNcMiy_EnYX44lYJhvUjAPqnrQUwjoyqNPS4Ssd2VRzTMN4RBAgGTPvEW-CXXYx'
-                },
-                method: "GET"
-            }).then(function(response){
-                // loop through response results
-                for(var i = 0; i < number; i++){
-                    // restaurant name
-                    var name = response.businesses[i].name;
-                    // img url
-                    var imgURL = response.businesses[i].image_url
-                    // rest types
-                    var type = response.businesses[i].categories[0].title
-                    // isClosed
-                    var isClosed = response.businesses[i].is_closed
-                    // address
-                    var address = response.businesses[i].location.address1 + ". " +response.businesses[i].location.city +", " + response.businesses[i].location.state +". "+  response.businesses[i].location.zip_code
-                    // phone number
-                    var phone = response.businesses[i].phone
-                    // price
-                    var price = response.businesses[i].price
-                    // rating
-                    var rating_val = response.businesses[i].rating
-
-                     var star = function (rating) {
-                        if (rating == 1) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_1.png" };
-                        if (rating == 1.5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_1_half.png" };
-                        if (rating == 2) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_2.png" };
-                        if (rating == 2.5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_2_half.png" };
-                        if (rating == 3) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_3.png" };
-                        if (rating == 3.5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_3_half.png" };
-                        if (rating == 4) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_4.png" };
-                        if (rating == 4.5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_4_half.png" };
-                        if (rating == 5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_5.png" };
-                    };
-                                      // website
-                    var websiteURL = response.businesses[i].url
-                    //logo image for yelp
-                    var imageObject = {};
-                    var logo = imageObject.src = "assets/images/Yelp Burst/Screen/Small_Yelp_burst_positive_RGB.png" 
-                    // dynamically creating a Materialize card for each item our ajax call returns
-
-                    var card = $("<div>")
-
-                    var b = $("<div>")
-                    b.addClass("col s12 m6")
-                    var c = $("<div>")
-                    c.addClass("card hoverable")
-                    var d = $("<div>")
-                    d.addClass("card-image")
-                    var e = $("<img>")
-                    e.attr("src", imgURL)
-                    e.addClass("resizeImg")
-                    var f = $("<h3>")
-                    f.addClass("card-title")
-                    f.text(name)
-                    var g = $("<div>")                   
-                    g.addClass("card-content")
-
-                    var cardBody1 = $("<p>");
-                    var a = $("<a>");
-                    a.attr("href", websiteURL);
-                    var imgYelp = $("<img>");
-                    imgYelp.attr("src", logo);
-                    a.append("Visit on");
-                    a.append(imgYelp);
-                    cardBody1.append(a);
-
-
-                    var cardBody2 = $("<p>")
-                    //checking if the establishment is closed or open to display on our card
-                    if(isClosed){
-                        cardBody2.text("Currently Closed")
-                    } else {
-                        cardBody2.text("Now Open")
-                    }
-                    var cardBody3 = $("<p>")
-                    cardBody3.text(address)
-                    var cardBody4 = $("<p>")
-                    cardBody4.text(phone)
-                    var cardBody5 = $("<p>")
-                    cardBody5.text(price)
-                    //displaying appropiate yelp star ratings graphics in accordance with Yelp Fusion guidelines
-                    var cardBody6 = $("<img>")
-                    cardBody6.attr("src", star(rating_val))
-
-                    g.append(f, cardBody2, cardBody3, cardBody4, cardBody5, cardBody6, cardBody1)  
-
-                    d.append(e)
-                    c.append(d,g)
-                    b.append(c)
-                    card.append(b)
-                    //appending the completed card to our result div.
-                    $("#results").append(card);
-                }
-                $("#displayParam").append("You are viewing bars in " + zip);
-            })
+            yelpCall()
         }
     });
 
     // hotel click listener
     $("#hotels-btn").on("click", function(){
+        btnClicked = $(this).attr("name")
         // empty results div
         $("#results").empty();
         $("#displayParam").empty();
-        // retrieve value from numVal
-        var numVal = $(".numVal").val()
-        console.log(numVal)
-        var numValInt = parseInt(numVal)
         // retrieve value from zipcode_inline
         zip = $("#zipcode_inline").val().trim()
         // check to make sure a value is entered in zip
         if(zip === ""){
             console.log("plase enter a value")
-            $("#displayParam").append("Please enter a location you would like to find events for.");
+            $("#displayParam").append("<h3>Please enter a location.</h3>");
             return false
         } else{
             weather();
-            // ajax call for hotels
-            let zipCode = zip;
-            let number = numValInt
-            console.log(number)
-            let queryURL = "https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/search?term=hotels&location=" + zipCode + "&limit=" + number;
-            
-            $.ajax({
-                url: queryURL,
-                headers:{
-                    'Authorization': 'Bearer h53RmJI935qCD6t1Hz-h2Xc8kq_IjzKtzs-zmXCTsQQDFhkaSX5hO_pXQJMbRZDAxTNcMiy_EnYX44lYJhvUjAPqnrQUwjoyqNPS4Ssd2VRzTMN4RBAgGTPvEW-CXXYx'
-                },
-                method: "GET"
-            }).then(function(response){
-                // loop through response results
-                for(var i = 0; i < number; i++){
-                    // restaurant name
-                    var name = response.businesses[i].name;
-                    // img url
-                    var imgURL = response.businesses[i].image_url
-                    // rest types
-                    var type = response.businesses[i].categories[0].title
-                    // isClosed
-                    var isClosed = response.businesses[i].is_closed
-                    // address
-                    var address = response.businesses[i].location.address1 + ". " +response.businesses[i].location.city +", " + response.businesses[i].location.state +". "+  response.businesses[i].location.zip_code
-                    // phone number
-                    var phone = response.businesses[i].phone
-                    // price
-                    var price = response.businesses[i].price
-                    // rating
-                    var rating_val = response.businesses[i].rating
-
-                    var star = function (rating) {
-                        if (rating == 1) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_1.png" };
-                        if (rating == 1.5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_1_half.png" };
-                        if (rating == 2) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_2.png" };
-                        if (rating == 2.5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_2_half.png" };
-                        if (rating == 3) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_3.png" };
-                        if (rating == 3.5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_3_half.png" };
-                        if (rating == 4) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_4.png" };
-                        if (rating == 4.5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_4_half.png" };
-                        if (rating == 5) {
-                            return "assets/images/yelp_stars/web_and_ios/small/small_5.png" };
-                    };
-                    
-                     // website
-                     var websiteURL = response.businesses[i].url
-                     //logo image for yelp
-                     var imageObject = {};
-                     var logo = imageObject.src = "assets/images/Yelp Burst/Screen/Small_Yelp_burst_positive_RGB.png" 
-                     // dynamically creating a Materialize card for each item our ajax call returns
- 
-                     var card = $("<div>")
- 
-                     var b = $("<div>")
-                     b.addClass("col s12 m6")
-                     var c = $("<div>")
-                     c.addClass("card hoverable")
-                     var d = $("<div>")
-                     d.addClass("card-image")
-                     var e = $("<img>")
-                     e.attr("src", imgURL)
-                     e.addClass("resizeImg")
-                     var f = $("<h3>")
-                     f.addClass("card-title")
-                     f.text(name)
-                     var g = $("<div>")                   
-                     g.addClass("card-content")
- 
-                     var cardBody1 = $("<p>");
-                     var a = $("<a>");
-                     a.attr("href", websiteURL);
-                     var imgYelp = $("<img>");
-                     imgYelp.attr("src", logo);
-                     a.append("Visit on");
-                     a.append(imgYelp);
-                     cardBody1.append(a);
- 
- 
-                     var cardBody2 = $("<p>")
-                     //checking if the establishment is closed or open to display on our card
-                     if(isClosed){
-                         cardBody2.text("Currently Closed")
-                     } else {
-                         cardBody2.text("Now Open")
-                     }
-                     var cardBody3 = $("<p>")
-                     cardBody3.text(address)
-                     var cardBody4 = $("<p>")
-                     cardBody4.text(phone)
-                     var cardBody5 = $("<p>")
-                     cardBody5.text(price)
-                     //displaying appropiate yelp star ratings graphics in accordance with Yelp Fusion guidelines
-                     var cardBody6 = $("<img>")
-                     cardBody6.attr("src", star(rating_val))
- 
-                     g.append(f, cardBody2, cardBody3, cardBody4, cardBody5, cardBody6, cardBody1)                  
-                    d.append(e)
-                    c.append(d,g)
-                    b.append(c)
-                    card.append(b)
-                    //appending the completed card to our result div.
-                    $("#results").append(card);
-                }
-                $("#displayParam").append("You are viewing hotels in " + zip);
-            })
+            yelpCall();
         }
     });
     
@@ -527,8 +294,6 @@ $(document).ready(function(){
         $("#results").empty();
         $("#displayParam").empty();
         //display holding message
-        $("#displayParam").append("This feature coming soon ");
-    });
-      
+        $("#displayParam").append("<h3>Coming soon</h3>");
+    });    
 })
-
