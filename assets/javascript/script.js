@@ -44,6 +44,8 @@ $(document).ready(function(){
         // check to make sure a value is entered in zip
         if(zip === ""){
             console.log("plase enter a value")
+ //           $("#displayParam").append("You are viewing events in " + zip);
+            $("#displayParam").append("Please enter a location you would like to find events for.");
             return false
         } else{
             weather();
@@ -130,6 +132,7 @@ $(document).ready(function(){
         // check to make sure a value is entered in zip
         if(zip === ""){
             console.log("plase enter a value")
+            $("#displayParam").append("Please enter a location you would like to find events for.");
             return false
         } else{
             weather();
@@ -262,6 +265,7 @@ $(document).ready(function(){
         // check to make sure a value is entered in zip
         if(zip === ""){
             console.log("plase enter a value")
+            $("#displayParam").append("Please enter a location you would like to find events for.");
             return false
         } else{
             weather();
@@ -394,6 +398,7 @@ $(document).ready(function(){
         // check to make sure a value is entered in zip
         if(zip === ""){
             console.log("plase enter a value")
+            $("#displayParam").append("Please enter a location you would like to find events for.");
             return false
         } else{
             weather();
