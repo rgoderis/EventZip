@@ -140,7 +140,8 @@ $(document).ready(function(){
                 $("#results").append(card);
             }
             $("#displayParam").empty();
-            $("#displayParam").append("<h3>You are viewing "+ btnClicked + " in " + zip + "</h3>");
+            $("#displayParam").append("<h3 class='text-center'>You are viewing "+ btnClicked + " in " + zip + "</h3>");
+
         })
     }
 
@@ -227,7 +228,8 @@ $(document).ready(function(){
                         $("#results").append(card);
                     };
                     $("#displayParam").empty();
-                    $("#displayParam").append("<h3>You are viewing "+ btnClicked + " in " + zip + "</h3>");
+                    $("#displayParam").append("<h3 class='text-center'>You are viewing "+ btnClicked + " in " + zip + "</h3>");
+
                 }
             });
         }
