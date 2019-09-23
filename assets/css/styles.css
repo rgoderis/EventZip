@@ -22,12 +22,10 @@ a {
 }
 
 #displayParam{
-    border: red solid 1px;
     color:  rgb(81, 164, 154);
 }
 
 #results {
-    border: blue solid 1px;
     text-align: center;
 }
 .card {
@@ -75,4 +73,16 @@ a {
 }
 .upperCaseMe {
     text-transform: capitalize;
+}
+.weatherSpace {
+    width: 21em;
+    background-color: #ee6e73;
+    color: white;
+    border-radius: 25px;
+}
+.padded {
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-top: 2%;
+        padding-bottom: 2%;
 }
