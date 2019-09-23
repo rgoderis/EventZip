@@ -6,9 +6,9 @@ The user enters what area they would like to search via zip code and selects how
 With the displayed results the user can then choose to buy tickets to the event or visit the Yelp page of the activity by clicking the link.
 
 ### APIs utilized 
-- First item Ticketmaster Discovery
-- Second item Yelp Fusion
-- Third item Open Weather Maps
+- Ticketmaster Discovery
+- Yelp Fusion
+- Open Weather Maps
 
 ### Frameworks utilized
 - jQuery
