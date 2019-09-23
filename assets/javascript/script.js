@@ -146,8 +146,13 @@ $(document).ready(function(){
 				
                     // website
                     var websiteURL = response.businesses[i].url
+                    //logo image for yelp
+                    var imageObject = {};
+                    var logo = imageObject.src = "assets/images/Yelp Burst/Screen/Small_Yelp_burst_positive_RGB.png" 
                     // dynamically creating a Materialize card for each item our ajax call returns
+
                     var card = $("<div>")
+
                     var b = $("<div>")
                     b.addClass("col s12 m6")
                     var c = $("<div>")
@@ -160,13 +165,19 @@ $(document).ready(function(){
                     var f = $("<h3>")
                     f.addClass("card-title")
                     f.text(name)
-                    var g = $("<div>")
+                    var g = $("<div>")                   
                     g.addClass("card-content")
-                    var cardBody1 = $("<p>")
-                    var a = $("<a>")
-                    a.attr("href", websiteURL)
-                    a.text("View Website")
-                    cardBody1.append(a)
+
+                    var cardBody1 = $("<p>");
+                    var a = $("<a>");
+                    a.attr("href", websiteURL);
+                    var imgYelp = $("<img>");
+                    imgYelp.attr("src", logo);
+                    a.append("Visit on");
+                    a.append(imgYelp);
+                    cardBody1.append(a);
+
+
                     var cardBody2 = $("<p>")
                     //checking if the establishment is closed or open to display on our card
                     if(isClosed){
@@ -180,14 +191,11 @@ $(document).ready(function(){
                     cardBody4.text(phone)
                     var cardBody5 = $("<p>")
                     cardBody5.text(price)
+                    //displaying appropiate yelp star ratings graphics in accordance with Yelp Fusion guidelines
                     var cardBody6 = $("<img>")
                     cardBody6.attr("src", star(rating_val))
 
-                   
-                //p6.attr("src", star(rating_val))  
-
-
-                    g.append(f, cardBody1,cardBody2, cardBody3, cardBody4, cardBody5, cardBody6)
+                    g.append(f, cardBody2, cardBody3, cardBody4, cardBody5, cardBody6, cardBody1)
                     d.append(e)
                     c.append(d,g)
                     b.append(c)
@@ -264,11 +272,15 @@ $(document).ready(function(){
                         if (rating == 5) {
                             return "assets/images/yelp_stars/web_and_ios/small/small_5.png" };
                     };
-                    
-                    // website
+                                      // website
                     var websiteURL = response.businesses[i].url
+                    //logo image for yelp
+                    var imageObject = {};
+                    var logo = imageObject.src = "assets/images/Yelp Burst/Screen/Small_Yelp_burst_positive_RGB.png" 
                     // dynamically creating a Materialize card for each item our ajax call returns
+
                     var card = $("<div>")
+
                     var b = $("<div>")
                     b.addClass("col s12 m6")
                     var c = $("<div>")
@@ -281,13 +293,19 @@ $(document).ready(function(){
                     var f = $("<h3>")
                     f.addClass("card-title")
                     f.text(name)
-                    var g = $("<div>")
+                    var g = $("<div>")                   
                     g.addClass("card-content")
-                    var cardBody1 = $("<p>")
-                    var a = $("<a>")
-                    a.attr("href", websiteURL)
-                    a.text("View Website")
-                    cardBody1.append(a)
+
+                    var cardBody1 = $("<p>");
+                    var a = $("<a>");
+                    a.attr("href", websiteURL);
+                    var imgYelp = $("<img>");
+                    imgYelp.attr("src", logo);
+                    a.append("Visit on");
+                    a.append(imgYelp);
+                    cardBody1.append(a);
+
+
                     var cardBody2 = $("<p>")
                     //checking if the establishment is closed or open to display on our card
                     if(isClosed){
@@ -301,9 +319,12 @@ $(document).ready(function(){
                     cardBody4.text(phone)
                     var cardBody5 = $("<p>")
                     cardBody5.text(price)
+                    //displaying appropiate yelp star ratings graphics in accordance with Yelp Fusion guidelines
                     var cardBody6 = $("<img>")
                     cardBody6.attr("src", star(rating_val))
-                    g.append(f, cardBody1,cardBody2, cardBody3, cardBody4, cardBody5, cardBody6)
+
+                    g.append(f, cardBody2, cardBody3, cardBody4, cardBody5, cardBody6, cardBody1)  
+
                     d.append(e)
                     c.append(d,g)
                     b.append(c)
@@ -383,45 +404,58 @@ $(document).ready(function(){
                             return "assets/images/yelp_stars/web_and_ios/small/small_5.png" };
                     };
                     
-                    // website
-                    var websiteURL = response.businesses[i].url
-                    // dynamically creating a Materialize card for each item our ajax call returns
-                    var card = $("<div>")
-                    var b = $("<div>")
-                    b.addClass("col s12 m6")
-                    var c = $("<div>")
-                    c.addClass("card hoverable")
-                    var d = $("<div>")
-                    d.addClass("card-image")
-                    var e = $("<img>")
-                    e.attr("src", imgURL)
-                    e.addClass("resizeImg")
-                    var f = $("<h3>")
-                    f.addClass("card-title")
-                    f.text(name)
-                    var g = $("<div>")
-                    g.addClass("card-content")
-                    var cardBody1 = $("<p>")
-                    var a = $("<a>")
-                    a.attr("href", websiteURL)
-                    a.text("View Website")
-                    cardBody1.append(a)
-                    var cardBody2 = $("<p>")
-                    //checking if the establishment is closed or open to display on our card
-                    if(isClosed){
-                        cardBody2.text("Currently Closed")
-                    } else {
-                        cardBody2.text("Now Open")
-                    }
-                    var cardBody3 = $("<p>")
-                    cardBody3.text(address)
-                    var cardBody4 = $("<p>")
-                    cardBody4.text(phone)
-                    var cardBody5 = $("<p>")
-                    cardBody5.text(price)
-                    var cardBody6 = $("<img>")
-                    cardBody6.attr("src", star(rating_val))
-                    g.append(f, cardBody1,cardBody2, cardBody3, cardBody4, cardBody5, cardBody6)
+                     // website
+                     var websiteURL = response.businesses[i].url
+                     //logo image for yelp
+                     var imageObject = {};
+                     var logo = imageObject.src = "assets/images/Yelp Burst/Screen/Small_Yelp_burst_positive_RGB.png" 
+                     // dynamically creating a Materialize card for each item our ajax call returns
+ 
+                     var card = $("<div>")
+ 
+                     var b = $("<div>")
+                     b.addClass("col s12 m6")
+                     var c = $("<div>")
+                     c.addClass("card hoverable")
+                     var d = $("<div>")
+                     d.addClass("card-image")
+                     var e = $("<img>")
+                     e.attr("src", imgURL)
+                     e.addClass("resizeImg")
+                     var f = $("<h3>")
+                     f.addClass("card-title")
+                     f.text(name)
+                     var g = $("<div>")                   
+                     g.addClass("card-content")
+ 
+                     var cardBody1 = $("<p>");
+                     var a = $("<a>");
+                     a.attr("href", websiteURL);
+                     var imgYelp = $("<img>");
+                     imgYelp.attr("src", logo);
+                     a.append("Visit on");
+                     a.append(imgYelp);
+                     cardBody1.append(a);
+ 
+ 
+                     var cardBody2 = $("<p>")
+                     //checking if the establishment is closed or open to display on our card
+                     if(isClosed){
+                         cardBody2.text("Currently Closed")
+                     } else {
+                         cardBody2.text("Now Open")
+                     }
+                     var cardBody3 = $("<p>")
+                     cardBody3.text(address)
+                     var cardBody4 = $("<p>")
+                     cardBody4.text(phone)
+                     var cardBody5 = $("<p>")
+                     cardBody5.text(price)
+                     //displaying appropiate yelp star ratings graphics in accordance with Yelp Fusion guidelines
+                     var cardBody6 = $("<img>")
+                     cardBody6.attr("src", star(rating_val))
+ 
+                     g.append(f, cardBody2, cardBody3, cardBody4, cardBody5, cardBody6, cardBody1)                  
                     d.append(e)
                     c.append(d,g)
                     b.append(c)
