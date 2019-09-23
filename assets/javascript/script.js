@@ -43,8 +43,7 @@ $(document).ready(function(){
         zip = $("#zipcode_inline").val().trim();
         // check to make sure a value is entered in zip
         if(zip === ""){
-            console.log("plase enter a value")
- //           $("#displayParam").append("You are viewing events in " + zip);
+            console.log("plase enter a value") 
             $("#displayParam").append("Please enter a location you would like to find events for.");
             return false
         } else{
@@ -113,7 +112,8 @@ $(document).ready(function(){
                         card.append(b)
                         //append "card" to the page wherever we want it.
                         $("#results").append(card);
-                    }
+                    };
+                    $("#displayParam").append("You are viewing events in " + zip);
                 }
             });
         }
@@ -248,6 +248,7 @@ $(document).ready(function(){
                     //appending the completed card to our result div.
                     $("#results").append(card);
                 }
+                $("#displayParam").append("You are viewing restaurants in " + zip);
             })
         }
     })
@@ -380,6 +381,7 @@ $(document).ready(function(){
                     //appending the completed card to our result div.
                     $("#results").append(card);
                 }
+                $("#displayParam").append("You are viewing bars in " + zip);
             })
         }
     });
@@ -514,8 +516,19 @@ $(document).ready(function(){
                     //appending the completed card to our result div.
                     $("#results").append(card);
                 }
+                $("#displayParam").append("You are viewing hotels in " + zip);
             })
         }
     });
+    
+    // movies click listener
+    $("#movies-btn").on("click", function(){
+        // empty results div
+        $("#results").empty();
+        $("#displayParam").empty();
+        //display holding message
+        $("#displayParam").append("This feature coming soon ");
+    });
+      
 })
 
