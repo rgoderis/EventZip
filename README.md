@@ -1,4 +1,4 @@
-# EventZip
+# EventZip
 ![Landing Page](assets/images/EventZip-home.png)
 
 ### EventZip pulls and displays event and activity information based on zip code. 
@@ -31,7 +31,7 @@ With the displayed results the user can then choose to buy tickets t
 ### Bars
 ![Landing Page](assets/images/Bars.png)
 
-### Hotels
+### Hotels
 ![Landing Page](assets/images/Hotels.png)
 
 [EventZip](https://rgoderis.github.io/EventZip/)
